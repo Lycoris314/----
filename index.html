@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>自作関数</title>
+        <link rel="stylesheet" href="index.css" />
+        <script src="nCk.js"></script>
+        <script src="permutation.js"></script>
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <h1>自作関数</h1>
+        <div class="container">
+            <h2>permutation(arr)</h2>
+            <p>配列arrの要素を並び替えてできる配列を列挙します</p>
+
+            <div class="outcome">
+                <form action="" class="permutation">
+                    <p>
+                        permutation([<input type="text" class="permutation" />])
+                        <button>実行</button>
+                    </p>
+                </form>
+                <p>結果：<span class="permutation"></span></p>
+            </div>
+            <div class="code">
+                <pre>
+<code>function permutation(arr) { 
+    let box = [];
+
+    rec([], 0); 
+    function rec(ar, i) { 
+        if (i == arr.length) { 
+            box.push(ar); 
+            return; 
+        } 
+        for (let j = 0; j <= ar.length; j++) { 
+            rec(ar.toSpliced(j, 0, arr[i]), i + 1); 
+        } 
+    } 
+    return box; 
+}</code>
+            </pre>
+            </div>
+        </div>
+        <div class="container">
+            <h2>nCk(n,k)</h2>
+            <p>長さnの0-1列で1がk個であるものを列挙します</p>
+
+            <div class="outcome">
+                <form action="" class="nCk">
+                    <p>
+                        nCk(<input type="text" class="nCk" />)
+                        <button>実行</button>
+                    </p>
+                </form>
+                <p>結果：<span class="nCk"></span></p>
+            </div>
+            <div class="code">
+                <pre>
+<code>function nCk(n, k) {
+    let box = [];
+
+    rec([], 0, 0);
+    function rec(arr, num, length) {
+        if (k - num > n - length) {
+            return;
+        }
+        if (length == n) {
+            box.push(arr);
+            return;
+        }
+        if (num == k) {
+            arr = arr.concat(new Array(n - length).fill(0));
+            box.push(arr);
+            return;
+        }
+        rec(arr.concat([0]), num, length + 1);
+        rec(arr.concat([1]), num + 1, length + 1);
+    }
+    return box;
+}</code>
+            </pre>
+            </div>
+        </div>
+    </body>
+</html>
