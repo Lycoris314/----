@@ -20,6 +20,7 @@ div.outcome {
     height: 150px;
     background-color: beige;
     overflow-y: scroll;
+    margin: 10px;
 }
 
 div.code {
