@@ -26,4 +26,34 @@ window.onload = () => {
             span.textContent = "[" + nCk(...arr).join("] [") + "]";
         }
     });
+
+    document
+        .querySelector("form.multiChoose")
+        .addEventListener("submit", (e) => {
+            e.preventDefault();
+            const input = document.querySelector("input.multiChoose").value;
+            const arr = input.split(",");
+
+            const span = document.querySelector("span.multiChoose");
+            if (arr[0] >= 20) {
+                span.textContent = "第一引数を20未満にしてください";
+            } else {
+                span.textContent = "[" + multiChoose(...arr).join("] [") + "]";
+            }
+        });
+
+    document
+        .querySelector("form.multiChoose2")
+        .addEventListener("submit", (e) => {
+            e.preventDefault();
+            const input = document.querySelector("input.multiChoose2").value;
+            const arr = input.split(",");
+
+            const span = document.querySelector("span.multiChoose2");
+            if (arr[0] >= 30) {
+                span.textContent = "第一引数を30未満にしてください";
+            } else {
+                span.textContent = "[" + multiChoose2(...arr).join("] [") + "]";
+            }
+        });
 };

@@ -7,13 +7,15 @@
         <link rel="stylesheet" href="index.css" />
         <script src="nCk.js"></script>
         <script src="permutation.js"></script>
+        <script src="multiChoose.js"></script>
+        <script src="multiChoose2.js"></script>
         <script src="index.js"></script>
     </head>
     <body>
         <h1>自作関数</h1>
         <div class="container">
             <h2>permutation(arr)</h2>
-            <p>配列arrの要素を並び替えてできる配列を列挙します</p>
+            <p>配列arrの要素を並び替えてできる配列を列挙します。</p>
 
             <div class="outcome">
                 <form action="" class="permutation">
@@ -47,9 +49,10 @@
                 </div>
             </details>
         </div>
+
         <div class="container">
             <h2>nCk(n,k)</h2>
-            <p>長さnの0-1列で1がk個であるものを列挙します</p>
+            <p>長さnの0-1列で1がk個であるものを列挙します。</p>
 
             <div class="outcome">
                 <form action="" class="nCk">
@@ -86,6 +89,96 @@
     }
     return box;
 }</code>
+            </pre>
+                </div>
+            </details>
+        </div>
+
+        <div class="container">
+            <h2>multiChoose(n,x)</h2>
+            <p>
+                非負整数を要素とする長さnの配列でその和がxであるようなものを列挙します。
+            </p>
+
+            <div class="outcome">
+                <form action="" class="multiChoose">
+                    <p>
+                        multiChoose(<input type="text" class="multiChoose" />)
+                        <button>実行</button>
+                    </p>
+                </form>
+                <p>結果：<span class="multiChoose"></span></p>
+            </div>
+            <details>
+                <summary>code</summary>
+                <div class="code">
+                    <pre>
+<code>function multiChoose(n, x) {
+    let box = [];
+    rec([]);
+
+    function rec(arr) {
+        if (arr.length >= n - 1) {
+            arr = arr.concat([x - sum(arr)]);
+            box.push(arr);
+            return;
+        }
+        for (let i = 0; i <= x - sum(arr); i++) {
+            rec(arr.concat([i]));
+        }
+    }
+
+    function sum(arr) {
+        return arr.reduce((acc, v) => acc + v, 0);
+    }
+    return box;
+}</code>
+            </pre>
+                </div>
+            </details>
+        </div>
+
+        <div class="container">
+            <h2>multiChoose2(n,x)</h2>
+            <p>
+                非負整数を要素とし、単調非減少である長さnの配列でその和がxであるようなものを列挙します。
+            </p>
+
+            <div class="outcome">
+                <form action="" class="multiChoose2">
+                    <p>
+                        multiChoose2(<input type="text" class="multiChoose2" />)
+                        <button>実行</button>
+                    </p>
+                </form>
+                <p>結果：<span class="multiChoose2"></span></p>
+            </div>
+            <details>
+                <summary>code</summary>
+                <div class="code">
+                    <pre>
+<code>function multiChoose2(n, x) {
+    let box = [];
+    rec([]);
+
+    function rec(arr) {
+        if (arr.length >= n - 1) {
+            arr = arr.concat([x - sum(arr)]);
+            box.push(arr);
+            return;
+        }
+        let s = arr.length == 0 ? 0 : arr.at(-1);
+        for (let i = s; i * (n - arr.length) <= x - sum(arr); i++) {
+            rec(arr.concat([i]));
+        }
+    }
+
+    function sum(arr) {
+        return arr.reduce((acc, v) => acc + v, 0);
+    }
+    return box;
+}
+</code>
             </pre>
                 </div>
             </details>
